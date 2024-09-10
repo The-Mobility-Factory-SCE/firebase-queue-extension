@@ -4,11 +4,11 @@ import * as admin from "firebase-admin";
 
 
 admin.initializeApp();
+let path = process.env.LISTEN_PATH || "/";
 
 
-export const onWrite = database.ref(process.env.PATH || "/")
+export const onWrite = database.ref(path)
   .onWrite((change, context) => {
-    let path = process.env.PATH || "/";
     //ignore root
     if(path === "/") {
       return;

@@ -48,7 +48,7 @@ resources:
       runtime: nodejs16
       eventTrigger:
         eventType: providers/google.firebase.database/eventTypes/ref.write
-        resource: projects/_/instances/${DATABASE_INSTANCE}/refs/${PATH}/{pushId}
+        resource: projects/_/instances/${DATABASE_INSTANCE}/refs/${LISTEN_PATH}/{pushId}
 
 # In the `params` field, set up your extension's user-configured parameters.
 # Learn more in the docs:

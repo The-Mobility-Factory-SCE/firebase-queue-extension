@@ -4,18 +4,18 @@ import * as admin from "firebase-admin";
 
 
 admin.initializeApp();
-let path = process.env.LISTEN_PATH || "/";
+let listenTo = process.env.LISTEN_PATH || "/";
 
 
-export const onWrite = database.ref(path)
+export const onWrite = database.ref(listenTo)
   .onWrite((change, context) => {
     //ignore root
-    if(path === "/") {
+    if(listenTo === "/") {
       return;
     }
-    logger.info("onWrite", `${path}/${change.after.key} changed`);
     let queue = process.env.QUEUE || "firebaseTriggers";
     let writeType = change.before.exists() && change.after.exists() ? "update" : !change.after.exists() ? "delete" : "create";
+    logger.info("onWrite", `${listenTo}/${change.after.key} ${writeType}`);
     
-    admin.database().ref(queue).child(path).push().set({"id": change.before.key, "timestamp": context.timestamp, "type": writeType});
+    admin.database().ref(queue).child(listenTo).push().set({"id": change.before.key, "timestamp": context.timestamp, "type": writeType});
   });

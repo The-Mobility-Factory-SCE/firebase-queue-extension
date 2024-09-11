@@ -18,7 +18,7 @@ license: Apache-2.0  # https://spdx.org/licenses/
 
 # Public URL for the source code of your extension.
 # TODO:  Replace this with your GitHub repo.
-sourceUrl: https://github.com/ORG_OR_USER/REPO_NAME
+sourceUrl: https://github.com/The-Mobility-Factory-SCE/firebase-queue-extension
 
 # Specify whether a paid-tier billing plan is required to use your extension.
 # Learn more in the docs: https://firebase.google.com/docs/extensions/reference/extension-yaml#billing-required-field
@@ -117,7 +117,7 @@ params:
   - param: QUEUE
     label: Queue
     description: >-
-      What is the database path for the queue you want to use?
+      What is the database path for the queue?
     example: "example: firebaseTriggers"
     type: string
     validationRegex: "^[^/]+(/[^/]+/[^/]+)*$"

@@ -1,5 +1,4 @@
-import { database } from "firebase-functions/v1";
-import {logger} from "firebase-functions";
+import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 
 
@@ -7,15 +6,15 @@ admin.initializeApp();
 let listenTo = process.env.LISTEN_PATH || "/";
 
 
-export const onWrite = database.ref(listenTo)
+export const onWrite = functions.database.ref(listenTo)
   .onWrite((change, context) => {
     //ignore root
     if(listenTo === "/") {
       return;
     }
-    let queue = process.env.QUEUE || "firebaseTriggers";
+    let queue = process.env.QUEUE || "firebaseQueue";
     let writeType = change.before.exists() && change.after.exists() ? "update" : !change.after.exists() ? "delete" : "create";
-    logger.info("onWrite", `${listenTo}/${change.after.key} ${writeType}`);
+    functions.logger.info("onWrite", `${listenTo}/${change.after.key} ${writeType}`);
     
-    admin.database().ref(queue).child(listenTo).push().set({"id": change.before.key, "timestamp": context.timestamp, "type": writeType});
+    return change.after.ref.root.child(queue).child(listenTo).push({"id": change.before.key, "timestamp": context.timestamp, "type": writeType});
   });

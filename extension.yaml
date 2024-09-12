@@ -24,6 +24,10 @@ sourceUrl: https://github.com/The-Mobility-Factory-SCE/firebase-queue-extension
 # Learn more in the docs: https://firebase.google.com/docs/extensions/reference/extension-yaml#billing-required-field
 billingRequired: true
 
+roles:
+  - role: firebasedatabase.admin
+    reason: Allows the extension to write data to Realtime Database
+
 # In an `apis` field, list any Google APIs (like Cloud Translation, BigQuery, etc.)
 # required for your extension to operate.
 # Learn more in the docs:
@@ -49,7 +53,6 @@ resources:
       eventTrigger:
         eventType: providers/google.firebase.database/eventTypes/ref.write
         resource: projects/_/instances/${DATABASE_INSTANCE}/refs/${LISTEN_PATH}/{pushId}
-
 # In the `params` field, set up your extension's user-configured parameters.
 # Learn more in the docs:
 # https://firebase.google.com/docs/extensions/reference/extension-yaml#params-field

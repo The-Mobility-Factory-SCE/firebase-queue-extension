@@ -4,7 +4,7 @@
 # Identifier for your extension
 # TODO: Replace this with an descriptive name for your extension.
 name: firebase-queue  
-version: 0.0.1  # Follow semver versioning
+version: 0.0.2  # Follow semver versioning
 specVersion: v1beta  # Version of the Firebase Extensions specification
 
 # Friendly display name for your extension (~3-5 words)
@@ -114,7 +114,7 @@ params:
       What is the path you want listen to for writes?
     example: "example: orders"
     type: string
-    validationRegex: "^[^/]+(/[^/]+/[^/]+)*$"
+    validationRegex: "^[^/]+(/[^/]+)*$"
     validationErrorMessage: Must be a valid path.
     required: true
   - param: QUEUE
@@ -123,6 +123,6 @@ params:
       What is the database path for the queue?
     example: "example: firebaseTriggers"
     type: string
-    validationRegex: "^[^/]+(/[^/]+/[^/]+)*$"
+    validationRegex: "^[^/]+(/[^/]+)*$"
     validationErrorMessage: Must be a valid path.
     required: true
